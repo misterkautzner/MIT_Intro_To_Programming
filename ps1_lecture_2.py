@@ -33,15 +33,24 @@
 ##print "Total amount paid: $", totalPaid
 ##print "Remaining balance: $", balance
 
-balance = float(raw_input("Enter the outstanding balance on your credit card: "))
+newBalance = float(raw_input("Enter the outstanding balance on your credit card: "))
 annualIntRate = float(raw_input("Enter the annual interest rate as a decimal: "))
 monIntRate = annualIntRate/12.0
-monPayment = balance/12.0
-months = 0
+monPayment = float('%.2f' % (newBalance/12.0 + 10))
+balance = newBalance
 
 while balance > 0:
-    balance = balance*(1+monIntRate)- monPayment
-    months += 1
+    for i in range(1, 13):
+        balance = float('%.2f' % (balance*(1+monIntRate)- monPayment))
+        
+        if(balance <= 0): #When the balance is cleared, we're done.
+            months = i
+            break
+
+    if(balance > 0):    #After 12 months, if balance is still positive, we need to restart the while loop with updated monPayment.
+        monPayment += 10
+        balance = newBalance
+
 
 print "RESULT"
 print "Monthly payment to pay off debt in 1 year: $", monPayment
