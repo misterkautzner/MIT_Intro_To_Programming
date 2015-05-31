@@ -77,20 +77,22 @@ annualIntRate = float(raw_input("Enter the annual interest rate as a decimal: ")
 monIntRate = annualIntRate/12.0
 lbound = float(newBalance/12.0)
 ubound = float((newBalance*(1 + annualIntRate/12.0)**12.0)/12.0)
-monPayment = float('%.2f' % (lbound + ubound)/2.0)
+monPayment = float('%.2f' % ((lbound + ubound)/2.0))
 balance = newBalance
+finished = 2
 
-while lbound != ubound:  #Calculate balance after 12 months until we find the minimum monthly payment that reduces balance to no greater than 0 in that time.
-    print monPayment
+#Calculate balance after 12 months until we find the minimum monthly payment that reduces balance to no greater than 0 in that time.
+while finished != 0:  #Terminates after 1 iteration once lbound and ubound are within 1 cent of each other.
     balance = newBalance
     
     for months in range(1, 13):
         balance = float('%.2f' % (balance*(1+monIntRate)- monPayment))
         
-        if(balance <= 0): #When the balance is cleared, we're done.
+        if(balance <= 0): #When the balance is cleared, we're done with this loop
             break
 
-    if(balance > 0):    #After 12 
+#Bisection method to find the right payment
+    if(balance > 0):
         lbound = monPayment
 
     elif(balance < 0):
@@ -100,7 +102,11 @@ while lbound != ubound:  #Calculate balance after 12 months until we find the mi
         lbound = monPayment
         ubound = monPayment
 
-    monPayment = float('%.2f' % (lbound + ubound)/2.0)
+    if(ubound - lbound <= .01):
+        finished -= 1
+        
+    monPayment = float('%.2f' % ((lbound + ubound + .001)/2.0))
+    print "lbound: ", lbound, "  monPayment: ", monPayment, "  ubound: ", ubound
 
 print "RESULT"
 print "Monthly payment to pay off debt in 1 year: $", monPayment
