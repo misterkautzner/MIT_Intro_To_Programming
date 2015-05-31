@@ -36,10 +36,13 @@
 newBalance = float(raw_input("Enter the outstanding balance on your credit card: "))
 annualIntRate = float(raw_input("Enter the annual interest rate as a decimal: "))
 monIntRate = annualIntRate/12.0
-monPayment = float('%.2f' % (newBalance/12.0 + 10))
+monPayment = int(newBalance/12)/10*10
+print monPayment
 balance = newBalance
 
-while balance > 0:
+while balance > 0:  #Calculate balance after 12 months until we find the minimum monthly payment that reduces balance to no greater than 0 in that time.
+    #print monPayment
+    
     for i in range(1, 13):
         balance = float('%.2f' % (balance*(1+monIntRate)- monPayment))
         
