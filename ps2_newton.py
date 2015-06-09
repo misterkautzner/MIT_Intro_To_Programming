@@ -7,7 +7,23 @@
 # Successive Approximation
 #
 
+tup = raw_input("Enter a poly tuple: ")
+y = raw_input("Enter a value for x: ")
+
+
+
 def evaluate_poly(poly, x):
+
+    #poly = tuple(poly)
+    x = float(x)
+    value = 0.0
+
+    for i in range(0, len(poly)):
+        #value += poly[i]
+        print poly[i]
+        value += (x**i)
+        
+    return value
     """
     Computes the polynomial function for a given value x. Returns that value.
 
@@ -23,6 +39,8 @@ def evaluate_poly(poly, x):
     """
     # TO DO ... 
 
+z = evaluate_poly(tup, y)
+print z
 
 def compute_deriv(poly):
     """
