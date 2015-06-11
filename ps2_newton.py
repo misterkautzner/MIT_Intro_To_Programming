@@ -9,8 +9,8 @@
 
 #tup = input("Enter a poly tuple: ")
 #y = raw_input("Enter a value for x: ")
-tup = (-13.39, 0.0, 17.5, 3.0, 1.0)
-
+#tup = (-13.39, 0.0, 17.5, 3.0, 1.0)
+tup = (56,)
 
 def evaluate_poly(poly, x):
 
@@ -53,19 +53,14 @@ def compute_deriv(poly):
     """
     # TO DO ...
 
-    newPoly = tuple()
-    print newPoly
+    newPoly = tuple((0.0,))  # The derivative of a constant is 0.
     
-    for i in range(0, len(poly)):
-        newPoly = tuple(newPoly + ((poly[i+1]*(i+1),)))
-        print newPoly
+    for i in range(1, len(poly)-1):  # Adds the derivative of each of the other terms
+        newPoly = tuple(newPoly + ((poly[i+1]*(i+1),)))  # to the tuple
 
     return newPoly
 
 
-z = compute_deriv(tup)
-#z = evaluate_poly(tup, y)
-print z
 
 def compute_root(poly, x_0, epsilon):
     """
