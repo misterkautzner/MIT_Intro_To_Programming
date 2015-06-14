@@ -2,15 +2,11 @@
 # Name: John Kautzner
 # Collaborators (Discussion): None
 # Collaborators (Identical Solution): None
-# Time: 0:45
+# Time: 2:15
 #
 # Successive Approximation
 #
 
-#tup = input("Enter a poly tuple: ")
-#y = raw_input("Enter a value for x: ")
-#tup = (-13.39, 0.0, 17.5, 3.0, 1.0)
-tup = (56,)
 
 def evaluate_poly(poly, x):
 
@@ -83,4 +79,21 @@ def compute_root(poly, x_0, epsilon):
     returns: tuple (float, int)
     """
     # TO DO ... 
+    
+    answer = epsilon + 1
+    iteration = 1.0
+
+    while(abs(answer) > epsilon):
+        answer = evaluate_poly(poly, x_0)
+
+        if(abs(answer) < epsilon):
+            break
+
+        x_0 = x_0 - answer/evaluate_poly(compute_deriv(poly), x_0)
+        iteration += 1
+
+    return (x_0, iteration)
+
+
+
 
