@@ -1,5 +1,8 @@
 # 6.00 Problem Set 3
-# 
+# Name: John Kautzner
+# Collaborators: None
+# Time: 0:00
+#
 # Hangman
 #
 
@@ -46,3 +49,5 @@ def choose_word(wordlist):
 wordlist = load_words()
 
 # your code begins here!
+
+print choose_word(wordlist)
