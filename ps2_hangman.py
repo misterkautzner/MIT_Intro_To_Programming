@@ -1,7 +1,7 @@
 # 6.00 Problem Set 3
 # Name: John Kautzner
 # Collaborators: None
-# Time: 1:00
+# Time: 1:40
 #
 # Hangman
 #
@@ -95,40 +95,59 @@ def update_info(guess, word, current_info):
 
     if(current_info == ''):
         for letter in word:
-            current_info += '_'
+            current_info += '_ '
 
-    for letter in word:
-        if(letter == guess):
+    for i in range(0, len(word)):
+        if(word[i] == guess):
+            current_info = current_info[:i*2] + guess + ' ' + current_info[(i+1)*2:]
 
+    return current_info
 
-            
-"""    
-current_info = '' #String containing blank spaces and correctly guess letters
-so_far = '' #String containing the letters that have been guessed so far
-guesses = 5
-word = choose_word(wordlist)
+"""
+##current_info = ''
+##word = "infernero"
+##guess = 'r'
+##current_info = update_info(guess, word, current_info)
+##print current_info
+##guess = 'e'
+##print update_info(guess, word, current_info)
+"""
+
+word = choose_word(wordlist)        
 print "Word selected."
 print "The word has ", len(word), " letters."
+
+current_word = '' #String containing blank spaces and correctly guess letters
+guess = '5'
+current_word = update_info(guess, word, current_word) #Initializing current_word
+print current_word
+
+
+so_far = '' #String containing the letters that have been guessed so far
+guesses = 5
+
+
 
 while(guesses > 0):
     "You have ", guesses, " guesses remaining."
     "Letters guessed: ", so_far.upper()
-    guess = input("Please guess a letter: ")
+    guess = raw_input("Please guess a letter: ")
 
-    so_far = letters_guessed(guess)
+    so_far = letters_guessed(guess, so_far) #Add letter to list of guessed letters
 
     if(in_word(guess, word)):
+        current_word = update_info(guess, word, current_word)
         print "Good guess: ", current_word
 
     else:
         print "Incorrect: ", current_word
         guesses -= 1
 
-if(guesses = 0):
+if(guesses == 0):
     print 'You lost. The word was "', word, '".'
 
 else:
     print 'The word was "', word, '". Way to go!'
 
 print "Thanks for playing!"
-"""
+#"""
