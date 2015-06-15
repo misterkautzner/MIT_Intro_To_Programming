@@ -1,7 +1,7 @@
 # 6.00 Problem Set 3
 # Name: John Kautzner
 # Collaborators: None
-# Time: 2:00
+# Time: 2:15
 #
 # Hangman
 #
@@ -103,7 +103,6 @@ def update_info(guess, word, current_info):
 
     return current_info
 
-
 word = choose_word(wordlist)        
 print "Word selected."
 print "The word has", len(word), "letters."
@@ -117,8 +116,6 @@ print current_word
 so_far = '' #String containing the letters that have been guessed so far
 guesses = 6
 
-
-
 while(guesses > 0):
     guess = raw_input("Please guess a letter: ")
     print
@@ -128,6 +125,9 @@ while(guesses > 0):
 
     if(in_word(guess, word)):
         current_word = update_info(guess, word, current_word)
+        if(not in_word('_', current_word)):
+            break
+        
         print "Good guess: ", current_word
 
     else:
