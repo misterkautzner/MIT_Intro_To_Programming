@@ -1,7 +1,7 @@
 # 6.00 Problem Set 3
 # Name: John Kautzner
 # Collaborators: None
-# Time: 1:40
+# Time: 2:00
 #
 # Hangman
 #
@@ -103,19 +103,10 @@ def update_info(guess, word, current_info):
 
     return current_info
 
-"""
-##current_info = ''
-##word = "infernero"
-##guess = 'r'
-##current_info = update_info(guess, word, current_info)
-##print current_info
-##guess = 'e'
-##print update_info(guess, word, current_info)
-"""
 
 word = choose_word(wordlist)        
 print "Word selected."
-print "The word has ", len(word), " letters."
+print "The word has", len(word), "letters."
 
 current_word = '' #String containing blank spaces and correctly guess letters
 guess = '5'
@@ -124,16 +115,16 @@ print current_word
 
 
 so_far = '' #String containing the letters that have been guessed so far
-guesses = 5
+guesses = 6
 
 
 
 while(guesses > 0):
-    "You have ", guesses, " guesses remaining."
-    "Letters guessed: ", so_far.upper()
     guess = raw_input("Please guess a letter: ")
+    print
 
     so_far = letters_guessed(guess, so_far) #Add letter to list of guessed letters
+    print "Letters guessed: ", so_far.upper()
 
     if(in_word(guess, word)):
         current_word = update_info(guess, word, current_word)
@@ -143,11 +134,15 @@ while(guesses > 0):
         print "Incorrect: ", current_word
         guesses -= 1
 
+    print "Guesses remaining:", guesses
+
+print
+print
+
 if(guesses == 0):
-    print 'You lost. The word was "', word, '".'
+    print 'You lost. The word was:   ', word.upper()
 
 else:
-    print 'The word was "', word, '". Way to go!'
+    print 'You won! The word was:', word.upper()
 
 print "Thanks for playing!"
-#"""
