@@ -2,7 +2,7 @@
 #
 # Name: John Kautzner
 # Collaborators: None
-# Time: 0:00
+# Time: 0:30
 #
 #
 # The 6.00 Word Game
@@ -82,6 +82,20 @@ def get_word_score(word, n):
     returns: int >= 0
     """
     # TO DO...
+
+    reg_points = 0  # counts up points for each letter
+
+    for letter in word:
+        reg_points += SCRABBLE_LETTER_VALUES[letter]
+
+    reg_points *= len(word)     # Multiplying points by length of word
+
+    if(len(word) == n):     # Adding 50 if they used all letters
+        reg_points += 50
+
+    return reg_points
+
+
     
 #
 # Make sure you understand how this function works and what it does!
@@ -151,6 +165,13 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
     # TO DO ...
+
+    for letter in word:
+        hand[letter] -= 1   # Subtract one of that letter for each of that letter
+
+    return hand
+
+
 
 #
 # Problem #3: Test word validity
