@@ -2,7 +2,7 @@
 #
 # Name: John Kautzner
 # Collaborators: None
-# Time: 0:30
+# Time: 1:40
 #
 #
 # The 6.00 Word Game
@@ -187,6 +187,22 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     """
     # TO DO...
+
+    temp_hand = hand
+
+    if word in word_list:
+        temp_hand = update_hand(temp_hand, word)
+
+        for key in temp_hand:
+            if(temp_hand[key] < 0):
+                return False   # A letter's count in word exceeds letter's count in hand
+
+    else:
+        return False   # If it's not a word, return false.
+
+    return True
+
+       
 
 def calculate_handlen(hand):
     handlen = 0
