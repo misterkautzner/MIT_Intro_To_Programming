@@ -2,7 +2,7 @@
 #
 # Name: John Kautzner
 # Collaborators: None
-# Time: 3:30
+# Time: 4:00
 #
 #
 # The 6.00 Word Game
@@ -249,6 +249,7 @@ def play_hand(hand, word_list):
     score = 0
     n = calculate_handlen(hand)
     word = ''
+    current_hand = hand.copy()
 
     print
     display_hand(hand)
@@ -259,18 +260,18 @@ def play_hand(hand, word_list):
         if(word == "."):    # Voluntary end of turn
             break
 
-        if(is_valid_word(word, hand, word_list)):
-            hand = update_hand(hand, word)
+        if(is_valid_word(word, current_hand, word_list)):
+            current_hand = update_hand(current_hand, word)
 
             print "Word score: ", get_word_score(word, n)
             score += get_word_score(word, n)
             
-            if(calculate_handlen(hand) == 0):  # End turn if all letters used
+            if(calculate_handlen(current_hand) == 0):  # End turn if all letters used
                 print "All letters used."
                 break
             
             print
-            display_hand(hand)
+            display_hand(current_hand)
             
             
         else:
@@ -302,17 +303,30 @@ def play_game(word_list):
     * If the user inputs anything else, ask them again.
     """
     # TO DO...
-"""
+
+    n = HAND_SIZE
     answer = 'n'
 
-    while(answer == 'n'):
+    while(answer != 'e'):
+
+        if(answer == 'n' or answer == 'r'):
+            if(answer == 'n'):
+                hand = deal_hand(n)   # Deal a new hand
+                
+            play_hand(hand, word_list)
+            
+
+        else:
+            print "Not a valid option."
+            print
 
 
         answer = raw_input("Enter 'n' to play a new hand, 'r' to reply the last hand, or 'e' to exit the game: ")
 
-        if(answer == 'e'):      # Exit
-            print "Thanks for playing!"
-            break"""
+
+
+    print "Thanks for playing!"
+    
 
 #
 # Build data structures used for entire session and play game
@@ -320,3 +334,4 @@ def play_game(word_list):
 if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
+
