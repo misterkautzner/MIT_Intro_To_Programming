@@ -2,7 +2,7 @@
 #
 # Name: John Kautzner
 # Collaborators: None
-# Time: 1:40
+# Time: 3:00
 #
 #
 # The 6.00 Word Game
@@ -116,7 +116,8 @@ def display_hand(hand):
         for j in range(hand[letter]):
              print letter,              # print all on the same line
     print                               # print an empty line
-
+    print
+    
 #
 # Make sure you understand how this function works and what it does!
 #
@@ -188,7 +189,7 @@ def is_valid_word(word, hand, word_list):
     """
     # TO DO...
 
-    temp_hand = hand
+    temp_hand = hand.copy()
 
     if word in word_list:
         temp_hand = update_hand(temp_hand, word)
@@ -242,6 +243,42 @@ def play_hand(hand, word_list):
       
     """
     # TO DO ...
+
+    score = 0
+    n = calculate_handlen(hand)
+    word = ''
+
+    print
+    display_hand(hand)
+
+    while(score != -1):
+        word = raw_input('Enter a word.  Enter "." to end your turn: ') # Player enters a word
+
+        if(word == "."):    # Voluntary end of turn
+            break
+
+        if(is_valid_word(word, hand, word_list)):
+            hand = update_hand(hand, word)
+
+            print "Word score: ", get_word_score(word, n)
+            score += get_word_score(word, n)
+            
+            if(calculate_handlen(hand) == 0):  # End turn if all letters used
+                print "All letters used."
+                break
+            
+            print
+            display_hand(hand)
+            
+            
+        else:
+            print "Invalid word."
+            print
+
+    print "End of turn."
+    print "Score for hand:  ", score
+    print
+    
 
 #
 # Problem #5: Playing a game
