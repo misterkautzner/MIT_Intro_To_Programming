@@ -2,7 +2,7 @@
 #
 # Name: John Kautzner
 # Collaborators: None
-# Time: 3:00
+# Time: 3:30
 #
 #
 # The 6.00 Word Game
@@ -167,10 +167,12 @@ def update_hand(hand, word):
     """
     # TO DO ...
 
-    for letter in word:
-        hand[letter] -= 1   # Subtract one of that letter for each of that letter
+    temp_hand = hand.copy()
 
-    return hand
+    for letter in word:
+        temp_hand[letter] = temp_hand.get(letter, 0) - 1   # Subtract one of that letter for each of that letter
+
+    return temp_hand
 
 
 
@@ -300,6 +302,17 @@ def play_game(word_list):
     * If the user inputs anything else, ask them again.
     """
     # TO DO...
+"""
+    answer = 'n'
+
+    while(answer == 'n'):
+
+
+        answer = raw_input("Enter 'n' to play a new hand, 'r' to reply the last hand, or 'e' to exit the game: ")
+
+        if(answer == 'e'):      # Exit
+            print "Thanks for playing!"
+            break"""
 
 #
 # Build data structures used for entire session and play game
