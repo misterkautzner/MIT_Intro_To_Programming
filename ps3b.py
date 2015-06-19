@@ -2,13 +2,28 @@
 #
 # Name: John Kautzner
 # Collaborators: None
-# Time: 0:00
+# Time: 0:45
 #
 
 
 from ps3a import *
 import time
 from perm import *
+
+hand = {'a':2, 'n':1, 't':1, 'o':1, 'm':1, 'y':1}
+hand1 = {'r':3, 'u':1, 'b':2, 'e':1, 'x':0}
+
+def len_of_hand(hand):
+    """
+    Returns the size of the hand
+    """
+
+    size = 0
+    
+    for k in hand:
+        size += hand[k]
+
+    return size
 
 
 #
@@ -25,6 +40,26 @@ def comp_choose_word(hand, word_list):
     word_list: list (string)
     """
     # TO DO...
+
+    actual_word = []
+    len_hand = len_of_hand(hand)
+    score = 0
+    high_word = ''
+
+    for n in range(1, len_hand + 1):   # Iterating on lengths of words
+        for w in get_perms(hand, n):    # Iterating on words of length n
+            if(is_valid_word(w, hand, word_list)):  # Returns true for valid words
+                actual_word += [w]  # Adds all actual words to a list
+
+    for w in actual_word:
+        if(get_word_score(w, len_hand) > score):    # Find the word on the list with the highest score
+            score = get_word_score(w, len_hand)
+            high_word = w       # Keep the word
+
+    return high_word
+
+
+#comp_choose_word({'a':1, 'x':2, 'l':3, 'e':1}, 4)
 
 #
 # Problem #6B: Computer plays a hand
