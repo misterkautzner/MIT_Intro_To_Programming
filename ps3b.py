@@ -2,7 +2,7 @@
 #
 # Name: John Kautzner
 # Collaborators: None
-# Time: 0:45
+# Time: 1:15
 #
 
 
@@ -13,18 +13,7 @@ from perm import *
 hand = {'a':2, 'n':1, 't':1, 'o':1, 'm':1, 'y':1}
 hand1 = {'r':3, 'u':1, 'b':2, 'e':1, 'x':0}
 
-def len_of_hand(hand):
-    """
-    Returns the size of the hand
-    """
-
-    size = 0
-    
-    for k in hand:
-        size += hand[k]
-
-    return size
-
+hand = deal_hand(HAND_SIZE)
 
 #
 #
@@ -42,7 +31,7 @@ def comp_choose_word(hand, word_list):
     # TO DO...
 
     actual_word = []
-    len_hand = len_of_hand(hand)
+    len_hand = calculate_handlen(hand)
     score = 0
     high_word = ''
 
@@ -83,7 +72,39 @@ def comp_play_hand(hand, word_list):
      hand: dictionary (string -> int)
      word_list: list (string)
     """
-    # TO DO ...    
+    # TO DO ...
+
+    score = 0
+    n = calculate_handlen(hand)
+    word = 'no word yet'
+    current_hand = hand.copy()
+
+    print
+    print "Current hand:"
+    display_hand(hand)  # Hand is Displayed
+
+    while(word != ''):
+
+        word = comp_choose_word(current_hand, word_list)   # Computer chooses a valid word
+        current_hand = update_hand(current_hand, word)  # Hand is updated
+
+        if(word == ''):
+            break
+
+        print "Word: ", word
+
+        print "Word score: ", get_word_score(word, n)
+        score += get_word_score(word, n)
+            
+        print
+        print "Current hand:"
+        display_hand(current_hand)
+
+    print "Out of words."
+    print "Score for hand:  ", score
+    print
+
+    
     
 #
 # Problem #6C: Playing a game
