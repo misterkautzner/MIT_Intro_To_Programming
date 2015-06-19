@@ -82,6 +82,8 @@ def comp_play_hand(hand, word_list):
     print
     print "Current hand:"
     display_hand(hand)  # Hand is Displayed
+    print "Computer is thinking..."
+    print
 
     while(word != ''):
 
@@ -129,6 +131,42 @@ def play_game(word_list):
     word_list: list (string)
     """
     # TO DO...
+
+    n = HAND_SIZE
+    answer = 'n'
+    u_or_c = 'u'
+
+    while(answer != 'e'):
+
+        u_or_c = raw_input("Enter 'u' to play, or 'c' for computer to play: ")
+
+        if(answer == 'n' or answer == 'r'):
+            if(answer == 'n'):
+                hand = deal_hand(n)   # Deal a new hand
+
+            if(u_or_c == 'u'):
+                play_hand(hand, word_list)
+
+            elif(u_or_c == 'c'):
+                comp_play_hand(hand, word_list)
+
+            else:
+                print "Not a valid option."
+                print
+
+        else:
+            print "Not a valid option."
+            print
+
+
+        answer = raw_input("Enter 'n' for a new hand, 'r' to reply hand, or 'e' to exit game: ") 
+        print
+        
+
+    print "Thanks for playing!"
+
+    
+    
         
 #
 # Build data structures used for entire session and play game
